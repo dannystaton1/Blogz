@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+      
+		<style>
+			#title { text-align: center; }
+
+			
+            body{
+                background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/gravel.png");
+		q		text-align: center;
+
+				color: rgb(12, 4, 59);
+    			font-family: "arial black";
+			}
+		</style>
+    </head>
+    
+	<body>
+		
+			<div class="container">
+				<a class="navbar-brand" href="/">Home</a>
+				<a class="navbar-brand" href="/blog">Main Blog Page</a>
+				<a class="navbar-brand" href="/newpost">Add a Blog Entry</a>
+                {% if loggedin %}
+					<a class="navbar-brand user-account" href="/logout">Logout</a>
+				{% else %}
+					<a class="navbar-brand user-account" href="/login">Login</a>
+				{% endif %}
+            
+            
+            </div>
+
+		</nav>
+			
+		<div class="container">
+			<h1 id="title"><br/>{{title}}</h1>
+
+            {% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+						<h3>{{ message }}</h3>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+
+
+			{% block content %}
+			{% endblock %}
+		</div>
+
+		
+		
+	</body>
+</html>

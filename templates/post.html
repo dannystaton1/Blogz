@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<p>{{body}}</p>
+	{% if signature %}
+		<p class="signature">written by <a href="/ublog?uname={{post.username}}">{{post.username}}</a></p>
+	{% endif %}
+
+{% endblock %}

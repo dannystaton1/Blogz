@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% if posts|length == 0 %}
+	
+		<p>No posts yet!</p>
+
+	{% else %}
+
+		{% for post in posts %}
+			<h3><a href="/blog?id={{post.id}}">{{post.title}}</a></h3>
+			<p>{{post.body}}</p>
+            {% if signature %}
+				<p class="signature">written by <a href="/ublog?uname={{post.username}}">{{post.username}}</a></p>
+			{% endif %}
+			
+
+			<hr />
+		{% endfor %}
+		<div class=pagination>
+			Go to page:&nbsp;
+			{%- for page in pagination.iter_pages() %}
+				{% if page %}
+					{% if page != pagination.page %}
+						{% if uname %}
+							<a href="/{{link}}?page={{page}}&uname={{uname}}">{{ page }}</a>
+						{% else %}
+							<a href="/{{link}}?page={{page}}">{{ page }}</a>
+						{% endif %}
+					{% else %}
+						<strong>{{ page }}</strong>
+					{% endif %}
+				{% else %}
+					<span class=ellipsis>…</span>
+			<hr />
+		{% endfor %}
+
+
+	{% endif %}
+
+
+{% endblock %}
