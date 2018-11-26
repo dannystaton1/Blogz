@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Register New Account</h2>
+<form action="/signup" method="post">
+	<table>
+		<tr>
+			<td><label for="username">Username</td>
+			<td><input type="text" id="username" name="username"{% if username %} value="{{username}}"{% endif %}/></td>
+			<td class="errormsg">{% if uerror %}{{uerror}}{% endif %}</td>
+		</tr><tr>
+			<td><label for="password">Password</label></td>
+			<td><input type="password" id="password" name="password"/></td>
+			<td class="errormsg">{% if perror %}{{perror}}{% endif %}</td>
+		</tr><tr>
+			<td><label for="verify">Confirm password</label></td>
+			<td><input type="password" id="verify" name="verify"/></td>
+			<td class="errormsg">{% if verror %}{{verror}}{% endif %}</td>
+		</tr>
+	</table>
+  <p><input type="submit" value="Sign Up"/></p>
+</form>
+
+{% endblock %}
