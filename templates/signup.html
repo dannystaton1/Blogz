@@ -1,25 +1,31 @@
-
 {% extends "base.html" %}
-{% block content %}
 
-<h2>Register New Account</h2>
-<form action="/signup" method="post">
-	<table>
-		<tr>
-			<td><label for="username">Username</td>
-			<td><input type="text" id="username" name="username"{% if username %} value="{{username}}"{% endif %}/></td>
-			<td class="errormsg">{% if uerror %}{{uerror}}{% endif %}</td>
-		</tr><tr>
-			<td><label for="password">Password</label></td>
-			<td><input type="password" id="password" name="password"/></td>
-			<td class="errormsg">{% if perror %}{{perror}}{% endif %}</td>
-		</tr><tr>
-			<td><label for="verify">Confirm password</label></td>
-			<td><input type="password" id="verify" name="verify"/></td>
-			<td class="errormsg">{% if verror %}{{verror}}{% endif %}</td>
-		</tr>
-	</table>
-  <p><input type="submit" value="Sign Up"/></p>
+{% block content %}
+<h1>Sign up</h1>
+<form action="/signup" method="POST">
+<table>
+    <tr>
+        <td><label for="username">Username</label></td>
+        <td>
+            <input name="username" type="username" value="{{ username }}">
+        </td><span class="error">{{name_error}}</span>
+    </tr>
+    <tr>
+        <td><label for="password">Password</label></td>
+        <td>
+            <input name="password" type="password"/>
+        </td><span class="error">{{pswd_error}}</span>
+    </tr>
+    <tr>
+        <td><label for="verify">Verify Password</label></td>
+        <td>
+            <input name="verify" type="password">
+        </td><span class="error">{{v_pswd_error}}</span>
+    </tr>
+</table>
+<input type="submit" value="Signup"/>
 </form>
+
+
 
 {% endblock %}

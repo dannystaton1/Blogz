@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <title>{{title}}</title>
-      
+        <title>{{page_title}}</title>
 		<style>
 			#title { text-align: center; }
 
@@ -12,61 +11,74 @@
 				text-align: center;
 
 				color: rgb(12, 4, 59);
-    			font-family: "arial black";
+    			font-family: "Courier New";
+                font-weight: bold;
 			}
 
         
-            input[type=text{
-                background-color: #3E686B;
+            input {
+                background-color: #31593b;
                 color: white;
                 width: 130px;
                 box-sizing: border-box;
                 border: 2px solid #ccc;
                 border-radius: 4px;
+                text-outline
+                
+            }
+
+            h1 {
+                -webkit-text-stroke: 1px black;
+                color: white;
+                text-shadow:
+                3px 3px 0 #000,
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+
+            }
+
+            nav{
+                text-align: center;
+                text-outline: #a01313;
+                font-family: "arial";
+                
                
-    
-                padding: 12px 20px 12px 40px;
-                -webkit-transition: width 0.4s ease-in-out;
-                transition: width 0.4s ease-in-out;
             }
 
 		</style>
     </head>
-    
-	<body>
-		
-			<div class="container">
-				<a class="navbar-brand" href="/">Home</a>
-				<a class="navbar-brand" href="/blog">Main Blog Page</a>
-				<a class="navbar-brand" href="/newpost">Add a Blog Entry</a>
-                {% if loggedin %}
-					<a class="navbar-brand user-account" href="/logout">Logout</a>
-				{% else %}
-					<a class="navbar-brand user-account" href="/login">Login</a>
-				{% endif %}
-            
-            
-            </div>
+    <body>
+        
+            {% if 'username' in session %}
+              {{ session['username'].capitalize() }}
+              <form action="/logout" method="post" id='logout'>
+                <input type="submit" value="Log Out" />
+              </form>
+            {% else %}
+              <a href="login">Login</a> | <a href="signup">Sign Up</a>
+            {% endif %}
+          </div>
+        <nav>
+            <!blog users>
+            <a href="/">Home</a>
+            <!Main blog page>
+            <a href="/blog">All Posts</a>
+            <!Add a Blog Entry>
+            <a href="/login">Make New Post</a>
+        </nav>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <ul>
+            {% for category,message in messages %}
+                <li class="{{category}}">{{message}}</li>
+            {% endfor %}
+            </ul>    
+        {% endwith %}
 
-		</nav>
-			
-		<div class="container">
-			<h1 id="title"><br/>{{title}}</h1>
+        {% block content %}
 
-            {% with messages = get_flashed_messages() %}
-				{% if messages %}
-					{% for message in messages %}
-						<h3>{{ message }}</h3>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
+        {% endblock %}
 
-
-			{% block content %}
-			{% endblock %}
-		</div>
-
-		
-		
-	</body>
+    </body>
 </html>
